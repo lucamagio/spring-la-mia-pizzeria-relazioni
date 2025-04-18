@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{'/fragments/headFragment' :: head}">
+    <title>Create new pizza</title>
+</head>
+
+<body>
+    <div th:insert="~{'/fragments/headerFragment' :: header}"></div>
+
+    <main class="container border border-black mt-5">
+        <h1>Offerta</h1>
+        </hr>
+
+        <form id="offerta-form" th:object="${offerta}" th:action="${editMode} ? @{|/offerte/create/${offerta.pizza.id}|} : @{/offerte/create}" method="post">
+            <input type="hidden" th:field="*{pizza}" id="pizza">
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <label class="form-label">Titolo</label>
+                            <input type="text" class="form-control" id="titolo" th:field="*{titolo}" th:errorClass="is-invalid">
+                            <ul th:if="${#fields.hasErrors('titolo')}">
+                                <li th:each="err : ${#fields.errors('titolo')}" class="text-danger" th:text="${err}"></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <label class="form-label">Data Inizio</label>
+                            <input type="date" class="form-control" id="dataInizio" th:field="*{dataInizio}" th:errorClass="is-invalid">
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <label class="form-label">Data Fine</label>
+                            <input type="date" class="form-control" id="dataFine" th:field="*{dataFine}" th:errorClass="is-invalid">
+                        </div>
+
+                        <div class="col-12 mt-3 mb-3">
+                            <button class="btn btn-primary" type="submit">Save</button>
+                            <a class="btn btn-danger" th:href="@{|/pizzeria/${offerta.pizza.id}|}">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </main>
+</body>
+
+</html>

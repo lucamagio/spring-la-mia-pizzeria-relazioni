@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-LaMiaPizzeriaRelazioniApplication<spring-la-mia-pizzeria-crud>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "it.lesson.la_mia_pizzeria_relazioni.LaMiaPizzeriaRelazioniApplication",
+            "projectName": "spring-la-mia-pizzeria-crud",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
