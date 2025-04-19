@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import it.lesson.la_mia_pizzeria_relazioni.model.Offerte;
 import it.lesson.la_mia_pizzeria_relazioni.model.Pizza;
+import it.lesson.la_mia_pizzeria_relazioni.repository.IngredientiRepository;
 import it.lesson.la_mia_pizzeria_relazioni.repository.OfferteRepository;
 import it.lesson.la_mia_pizzeria_relazioni.repository.PizzaRepository;
 import jakarta.validation.Valid;
@@ -39,6 +40,9 @@ public class PizzeriaController {
 
     @Autowired
     private OfferteRepository offerteRepository;
+
+    @Autowired
+    private IngredientiRepository ingredientiRepository;
 
     @GetMapping("/")
     public String index(Model model, @RequestParam(name="keyword", required = false) String nome) {
@@ -69,6 +73,7 @@ public class PizzeriaController {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("pizza", new Pizza());
+        model.addAttribute("ingredientiList", ingredientiRepository.findAll());
         return "create";
     }
 
@@ -88,6 +93,7 @@ public class PizzeriaController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("pizza", pizzaRepository.findById(id).get());
+        model.addAttribute("ingredientiList", ingredientiRepository.findAll());
         
         return "edit";
     }

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{'/fragments/headFragment' :: head}">
+    <title>Ingredienti</title>
+</head>
+
+<body>
+    <div th:insert="~{'/fragments/headerFragment' :: header}"></div>
+    <main class="container mt-5">
+        <h1>Ingredienti</h1>
+        <div class="row mt-3 mb-5">
+            <div class="col-4">
+                <form id="ingredienti-form" th:object="${ingredientiObj}" th:action="@{/ingredienti/create}" method="post">
+                    <div class="input-group mt-3 mb-3">
+                        <input id="ingredienti" class="form-control" type="text" th:field="*{name}">
+                        <button class="btn btn-success" type="submit"><i class="fas fa-plus"></i>Add</button>
+                    </div>
+                </form>
+                
+                <ul class="list-group" th:if="${list.size() > 0}">
+                    <li class="list-group-item d-flex justify-content-between" th:each="item : ${list}">
+                        <div class="d-flex align-items-center">
+                            <span th:text="${item.name}"></span>
+                        </div>
+                        <form th:action="@{|/ingredienti/delete/${item.id}|}" method="post">
+                            <button class="btn btn-danger" type="submit" id="submitButton" onclick="return confirm('Sei sicuro?')"><i class="fas fa-trash"></i></button>
+                        </form>
+
+                    </li>
+
+                </ul>
+                <div class="alert alert-primary" role="alert" th:unless="${list.size() > 0}">
+                    Non ci sono ingredienti nel Database
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
